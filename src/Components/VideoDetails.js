@@ -1,6 +1,6 @@
 import { Paper, Typography } from "@material-ui/core";
 
-export default ({ video }) => {
+const VideoDetails = ({ video }) => {
    if (!video)
       return (
          <Paper elevation={6} m={2} style={{ height: "70%" }}>
@@ -32,3 +32,4 @@ export default ({ video }) => {
       </>
    );
 };
+export default VideoDetails;

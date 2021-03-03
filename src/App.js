@@ -30,7 +30,7 @@ const App = () => {
    };
 
    useEffect(() => {
-     typeof handleSubmit == "function" && handleSubmit("youtube");
+      handleSubmit("youtube");
    }, []);
 
    return (
