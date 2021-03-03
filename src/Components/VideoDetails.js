@@ -1,4 +1,3 @@
-import React from "react";
 import { Paper, Typography } from "@material-ui/core";
 
 export default ({ video }) => {
@@ -19,7 +18,7 @@ export default ({ video }) => {
    console.log(videoSrc);
 
    return (
-      <React.Fragment>
+      <>
          <Paper elevation={6} m={2} style={{ height: "70%" }}>
             <iframe frameBorder="0" height="100%" width="100%" title="Video Player" src={videoSrc} />
          </Paper>
@@ -30,6 +29,6 @@ export default ({ video }) => {
             <Typography variant="subtitle1">{video.snippet.channelTitle}</Typography>
             <Typography variant="subtitle2">{video.snippet.description}</Typography>
          </Paper>
-      </React.Fragment>
+      </>
    );
 };
