@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Grid } from "@material-ui/core";
 import SearchBar from "./Components/SearchBar";
 import VideoDetails from "./Components/VideoDetails";
@@ -9,34 +9,29 @@ const api = axios.create({
 });
 
 const App = () => {
-   const [videos, setVideos] = React.useState([]);
-   const [selectedVideo, setSelectedVideo] = React.useState(null);
+   const [videos, setVideos] = useState([]);
+   const [selectedVideo, setSelectedVideo] = useState(null);
 
    const handleSubmit = async (searchTerm) => {
-     try{
-      const { data } = await api.get("search", {
-         params: {
-            part: "snippet",
-            maxResults: 5,
-            key: process.env.REACT_APP_API_KEY,
-            q: searchTerm,
-         },
-      });
-      console.log(data)
-      setVideos(data.items);
-     
-      setSelectedVideo(videos[0]);
-    }
-    catch(error){
-    console.log(error)
-    }
-    
-      
+      try {
+         const { data } = await api.get("search", {
+            params: {
+               part: "snippet",
+               maxResults: 5,
+               key: process.env.REACT_APP_API_KEY,
+               q: searchTerm,
+            },
+         });
+         setVideos(data.items);
+         setSelectedVideo(videos[0]);
+      } catch (error) {
+         console.log(error);
+      }
    };
 
    useEffect(() => {
-    handleSubmit("youtube")
-   }, [])
+     typeof handleSubmit == "function" && handleSubmit("youtube");
+   }, []);
 
    return (
       <Grid style={{ justifyContent: "center" }} container spacing={10}>
@@ -46,7 +41,6 @@ const App = () => {
                   <SearchBar onFormSubmit={handleSubmit} />
                </Grid>
 
-              
                <Grid item xs={5}>
                   <VideoList videos={videos} onVideoSelect={setSelectedVideo} />
                </Grid>
